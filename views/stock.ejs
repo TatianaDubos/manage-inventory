@@ -1,0 +1,44 @@
+<%- include('./layouts/header') -%>
+
+<main>
+    <h1>Gérer les stocks</h1>
+
+    <fieldset>
+        <legend>Entrez les informations</legend>
+
+        <% if( erreurs != null && erreurs.length > 0){ %>
+            <ul>
+                <%  for(var i=0; i < erreurs.length; i++){ %>
+                    <li class="erreurs">
+                        <%= erreurs[i] %>
+                    </li>
+                <% } %>
+            </ul>
+        <% } else if(confirm == "true") { %>
+            <p class="confirm">Le stock du produit a été modifié</p>
+        <% } %>
+     
+        <form id="form" method="post"  enctype="multipart/form-data">
+          <table>
+    
+            <tr>
+               <td><label>Code</label></td> 
+                <td><input type="text" name="code" required value="<%= code %>"></td> 
+            </tr>
+    
+    
+            <tr>
+                <td><label>Quantité</label></td>
+                <td><input type="number" name="quantite" min="1" required value="<%= quantite %>"></td>
+            </tr>
+    
+            <tr>
+                <td colspan="2">
+                    <button type="submit" formaction="/stock/add" >Augmenter</button>
+                    <button type="submit" formaction="/stock/remove">Diminuer</button>
+                </td>
+            </tr>
+        </table> 
+        </form>
+        </fieldset>
+</main>

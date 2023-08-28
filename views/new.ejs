@@ -1,0 +1,54 @@
+<%- include('./layouts/header') -%>
+<main>
+    <h1>Créer un produit</h1>
+
+    <fieldset>
+    <legend>Entrez les informations</legend>
+
+    <% if( erreurs != null && erreurs.length > 0){ %>
+        <ul>
+            <%  for(var i=0; i < erreurs.length; i++){ %>
+                <li class="erreurs">
+                    <%= erreurs[i] %>
+                </li>
+            <% } %>
+        </ul>
+    <% } else if(confirm == "true") { %>
+        <p class="confirm">Le produit a été créé avec succès</p>
+    <% } %>
+
+    <form method="post" action="/new/store" enctype="multipart/form-data">
+      <table>
+
+        <tr>
+           <td><label>Code</label></td> 
+            <td><input type="text" name="code" required value="<%= code %>"></td> 
+        </tr>
+
+        <tr>
+            <td><label>Nom</label></td>
+            <td><input type="text" name="nom" required value="<%= nom %>"></td>
+        </tr>
+
+        <tr>
+            <td><label>Prix unitaire</label></td>
+            <td><input type="number" name="prix" required step="0.01" min="1" value="<%= prix %>"></td>
+        </tr>
+        
+        <tr>
+            <td><label>Image</label></td>
+            <td><input type="file" name="image" required onchange="previewImage(event)"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><img id="imagePreview"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2"><button type="submit">Créer</button></td>
+        </tr>
+    </table> 
+    </form>
+    </fieldset>
+</main>

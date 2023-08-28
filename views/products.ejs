@@ -1,0 +1,90 @@
+<%- include('./layouts/header') -%>
+
+<main>
+
+    <form class="search" method="post" action="/products/search">
+        <table>
+            <tr>
+                <td><input type="text" name="recherche"></td>
+                <td> <button type="submit">Rechercher</button></td>
+            </tr>
+        </table>
+        
+    </form>
+
+    <h1>Liste des produits</h1>
+
+    <div class="list">
+        <% if(list.length == 0){ %>
+            <p>Aucun produit</p>
+            <% } else { %>
+                <% for(var i=0; i < list.length; i++){ %>
+    
+                    <table class="card">
+                        <tr>
+                            <td colspan="2"><img src="<%= list[i].image %>"></td>
+                        </tr>
+                        <tr>
+                            <td>Code:</td>
+                            <td><%= list[i].code %></td>
+                        </tr>
+                        <tr>
+                            <td>Nom:</td>
+                            <td><%= list[i].nom %></td>
+                        </tr>
+                        <tr>
+                            <td>Prix:</td>
+                            <td><%= list[i].prix %> $</td>
+                        </tr>
+                        <tr>
+                            <td>Quantité:</td>
+                            <td><%= list[i].quantite %></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><a onclick="return showConfirmation()" href="/products/delete/<%= list[i]._id %>"><button >Supprimer</button></a></td>
+                        </tr>
+                    </table>
+    
+            <% }} %>
+
+    </div>
+
+    <br><br>
+
+    <h1>Corbeille</h1>
+
+    <div class="supplist">
+       <% if(supplist.length == 0){ %>
+        <p>Aucun produit </p>
+        <% } else { %>
+            <% for(var i=0; i < supplist.length; i++){ %>
+
+                <table class="card">
+                    <tr>
+                        <td colspan="2"><img src="<%= supplist[i].image %>"></td>
+                    </tr>
+                    <tr>
+                        <td>Code:</td>
+                        <td><%= supplist[i].code %></td>
+                    </tr>
+                    <tr>
+                        <td>Nom:</td>
+                        <td><%= supplist[i].nom %></td>
+                    </tr>
+                    <tr>
+                        <td>Prix:</td>
+                        <td><%= supplist[i].prix %> $</td>
+                    </tr>
+                    <tr>
+                        <td>Quantité:</td>
+                        <td><%= supplist[i].quantite %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><a onclick="return showConfirmation()" href="/products/cancel/<%= supplist[i]._id %>"><button>Restaurer</button></a></td>
+                    </tr>
+                </table>
+
+        <% }} %>
+    </div>
+
+</main>
